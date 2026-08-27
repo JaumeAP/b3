@@ -1,5 +1,3 @@
-# CineIA_CLImxf
-
 <!-- claude-rules:begin -->
 ## Working agreement
 
