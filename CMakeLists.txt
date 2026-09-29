@@ -14,8 +14,8 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)
 # Include iab-renderer library
 add_subdirectory(external/iab-renderer)
 set(IABLib_HEADER_PATH
-    external/iab-renderer/include
-    external/iab-renderer/src/lib
+    ${CMAKE_SOURCE_DIR}/external/iab-renderer/include
+    ${CMAKE_SOURCE_DIR}/external/iab-renderer/src/lib
 )
 
 # Include asdcplib library
@@ -56,17 +56,8 @@ target_compile_definitions(cineia PRIVATE
     PROJECT_VERSION_PATCH=${PROJECT_VERSION_PATCH}
 )
 
-# Self-check for the ADM -> IAB bed channel mapping (adm_bed_mapping.*)
-add_executable(adm_bed_mapping_selfcheck
-    adm_bed_mapping.h adm_bed_mapping.cpp
-    adm_bed_mapping_selfcheck.cpp
-)
-target_link_libraries(adm_bed_mapping_selfcheck
-    IABLib
-)
-target_include_directories(adm_bed_mapping_selfcheck PRIVATE
-    ${IABLib_HEADER_PATH}
-)
+# ADM -> IAB conversion package (independent of cineia - see adm2iab/CMakeLists.txt)
+add_subdirectory(adm2iab)
 
 # Set install rules
 install(TARGETS cineia RUNTIME DESTINATION bin)
