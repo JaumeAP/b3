@@ -56,5 +56,17 @@ target_compile_definitions(cineia PRIVATE
     PROJECT_VERSION_PATCH=${PROJECT_VERSION_PATCH}
 )
 
+# Self-check for the ADM -> IAB bed channel mapping (adm_bed_mapping.*)
+add_executable(adm_bed_mapping_selfcheck
+    adm_bed_mapping.h adm_bed_mapping.cpp
+    adm_bed_mapping_selfcheck.cpp
+)
+target_link_libraries(adm_bed_mapping_selfcheck
+    IABLib
+)
+target_include_directories(adm_bed_mapping_selfcheck PRIVATE
+    ${IABLib_HEADER_PATH}
+)
+
 # Set install rules
 install(TARGETS cineia RUNTIME DESTINATION bin)
